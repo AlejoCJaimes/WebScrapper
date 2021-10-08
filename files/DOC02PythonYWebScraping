@@ -1,0 +1,15 @@
+Python para WebScraping
+________________________
+
+Python es uno de los lenguajes que está más especializado para hacer
+web scraping y ciencia de datos.
+
+Python provee una serie de módulos para realizar web scraping:
+
+- Requests: 		Librería que nos permite controlar HTTP.
+- BeautifilSoup: 	Sirve para extraer información de un documento html.
+- Selenium: 		Creamos navegadores fantasmas que nos permiten controlar sitios web de forma automática.
+- Scrapy: 		Framework avanzado para recopilación de datos
+
+Las herramientas más utilizadas 
+para hacer webscraping: https://www.scraperapi.com/blog/the-10-best-web-scraping-tools/

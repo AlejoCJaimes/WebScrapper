@@ -1,0 +1,24 @@
+HTTP 
+Hypertext Transfer Protocol
+Conjunto de reglas en el cual dos computadores
+se comunican a través de la red. Su nombre es 
+cliente y servidor. Y si, es la arquitectura
+más famosa, Cliente-Servidor
+
+Arquitectura cliente servidor: https://es.wikipedia.org/wiki/Cliente-servidor
+
+Estructura HTTP
+ver la carpeta examples/http_request_ex.py
+
+Códigos de Estado HTTP (Status code HTTP)
+
+1XX: Informational: El servidor informa al cliente que su solicitud está en proceso.
+2XX: Succes: Informa una operación exitosa
+3XX: Redirection: Muestra que el servidor recibio la solicitud del cliente, sin embargo son necesarios 
+pasos adicionales.
+4XX: Cliente Error: **El servidor recibio la solicitud del cliente, sin embargo no se pudo completar.
+5XX: Server Error: El servidor fallo al intentar realizar la solicitud.
+
+más información:
+https://www.ionos.com/digitalguide/hosting/technical-matters/the-most-important-http-status-codes-at-a-glance/
+
