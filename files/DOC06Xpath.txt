@@ -1,0 +1,12 @@
+Xpath (XML Path language)
+
+Xpath es un lenguaje de patrones, expresiones que me permitirá extraer datos de un HTML. 
+Puntualmente sirve para apuntar a partes de un documento XML
+
+Principalmente se utilizaba para extraer datos de un archivo XML
+
+XML (Xtensible markup lenguage) 
+Sirvio para definir interfaces, es un lenguaje de nodos o etiquetas.
+
+En conclusión es una técnica para extraer datos de tipos de archivos
+XML y HTML

@@ -1,0 +1,37 @@
+Robots.txt
+
+Los archivos robots.txt exiten como una forma de administrar una página web.
+proporciona información a los rastreadores de los buscadores sobre las páginas 
+o los archivos que pueden solicitar o no de tu sitio web.
+Principalmente, se utiliza para evitar que tu sitio web se sobrecargue con solicitudes.
+En el contexto de webscraping, le dice al scraper que puede y no extraer. 
+Es decir hasta donde puede llegar. 
+Ya que infrigir en la violación de estas directivas puede acarrear un problema legal con 
+el sitio web al que estamos scrapeando.
+
+
+DIRECTIVAS
+
+ALLOW: Utiliza esta directiva para permitir a los motores de búsqueda rastrear un subdirectorio o una página,
+incluso en un directorio que de otro modo no estaría permitido
+
+DISALLOW: Utiliza esta directiva para indicar a los motores de búsqueda que no accedan a archivos 
+y páginas que se encuentren bajo una ruta específica
+
+SITEMAP:  Indica la ubicación de un sitemap de este sitio web. 
+La URL del sitemap debe ser una URL cualificada, ya que Google no comprueba alternativas con o sin www, 
+o con http o https. 
+Los sitemaps son una buena forma de indicar el contenido que Google debe rastrear, 
+frente al contenido que puede o no puede rastrear.
+.
+.
+.
+
+En últimas un archivo robots.txt debe estar en la raíz de la página y sirve para limitar las acciones 
+de web scraping, como entrar a datos sensibles, es información que no queremos que se acceda, 
+es considerado como buena practica respetarlo para evitarnos problemas legales.
+.
+.
+.
+Directrices de Google para crear archivos robots.txt: 
+https://developers.google.com/search/docs/advanced/robots/create-robots-txt?hl=es&visit_id=637692655262230002-2280511885&rd=1

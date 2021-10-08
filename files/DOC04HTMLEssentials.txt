@@ -1,0 +1,31 @@
+HTML (Hypert Text Markup Language)
+
+Es una lenguaje que permite definir la estructura de una página web.
+Regularmente se conoce como el esqueleto de la pag web.
+
+En el contexto de webscraping HTML es muy importante
+
+Funciona por medio de etiquetas que se condensan en angle brakets.<>
+Una etiqueta puede contener a otras etiquetas y las etiquetas tienen atributos.
+
+Etiquetas importantes:
+
+<script>
+Se utiliza para insertar código o una ruta donde esta el codigo 
+que ejecuta una acción dentro de una página web.
+
+<iframe>
+Representa un contexto de navegación anidado, el cual permite 
+incrustrar otra página HTML en la página actual.
+
+<meta>
+En términos generales los metadatos son datos sobre los datos, 
+algo así como un índice de cosas; por ejemplo:
+- los metadatos de una biblioteca serían las fichas donde se relacionan 
+los libros por género, estantería donde está el libro, escritor etc. 
+
+En el contexto HTML Los metadatos son atributos que no se muestran en la página web, 
+pero que sirven para identificar cosas como el autor de la página, 
+el lenguaje en que está escrito, palabras clave para que los motores de búsqueda las indexen etc. 
+Estos metadatos se crean con la etiqueta <meta> y aunque no son visibles al usuario de un sitio web
+si se pueden analizar de forma automática por código.
