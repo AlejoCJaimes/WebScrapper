@@ -1,1 +1,6 @@
 venv/
+project/.APICredentials.txt
+project/TokenApp.txt
+project/credentials.py
+project/Acc.txt
+project/__pycache__
