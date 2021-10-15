@@ -1,0 +1,4 @@
+# documentación acerca del uso de la API de extracción de SODA
+url: https://dev.socrata.com/docs/app-tokens.html
+
+

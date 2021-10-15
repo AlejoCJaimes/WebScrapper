@@ -1,0 +1,12 @@
+# Instalar entorno virtual en Linux
+
+#virtualenv con python3 en ubuntu 20.04
+
+Guía de instalación:  https://ludwingperezt.medium.com/instalar-virtualenv-con-python3-en-ubuntu-20-04-11729720ec53
+
+
+# Activar entorno virtual venv
+
+source venv/bin/activate
+
+

@@ -1,0 +1,8 @@
+# Librerias requeridas
+
+* requests 
+* lxml -> Utilizar XPATH dentro de python de manera básica
+* autopep8 -> Formatear el código para que quede según los estándares del lenguaje
+* pandas 
+* sodapy
+sudo pip install request lxml autopep8
