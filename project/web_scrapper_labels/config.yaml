@@ -1,0 +1,8 @@
+data_sites:
+  saber_11_2020_1:
+    url: https://dev.socrata.com/foundry/www.datos.gov.co/a8xr-en99
+  saber_11_2020_2:
+    url: https://dev.socrata.com/foundry/www.datos.gov.co/rnvb-vnyh
+    queries:
+      homepage_datagovs_labels = ''
+

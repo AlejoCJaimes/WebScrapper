@@ -1,4 +1,8 @@
 # documentación acerca del uso de la API de extracción de SODA
 url: https://dev.socrata.com/docs/app-tokens.html
 
+# route ext: https://www.datos.gov.co/resource/rnvb-vnyh.json
+# https://dev.socrata.com/foundry/www.datos.gov.co/rnvb-vnyh
+# extract with SODA API
 
+#!/usr/bin/env python

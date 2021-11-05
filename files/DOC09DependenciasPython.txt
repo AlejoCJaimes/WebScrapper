@@ -5,4 +5,7 @@
 * autopep8 -> Formatear el código para que quede según los estándares del lenguaje
 * pandas 
 * sodapy
+* matploblib
+* yaml
+* beautifulsoup4
 sudo pip install request lxml autopep8
