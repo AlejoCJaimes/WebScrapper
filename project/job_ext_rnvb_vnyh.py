@@ -8,19 +8,14 @@
 import pandas as pd
 from sodapy import Socrata
 import credentials as cred
-# Unauthenticated client only works with public data sets. Note 'None'
-# in place of application token, and no username or password:
-#client = Socrata("www.datos.gov.co", None)
 
-# Example authenticated client (needed for non-public datasets):
-
+# authenticated client
 client = Socrata(domain="www.datos.gov.co",
                   app_token=cred.data.getToken(),
                   username=cred.data.getUser(),
                   password=cred.data.getPass())
 
-# First 2000 results, returned as JSON from API / converted to Python list of
-# dictionaries by sodapy.
+# dictionaries by sodapy
 results = client.get("rnvb-vnyh", limit=2000)
 
 # Convert to pandas DataFrame
