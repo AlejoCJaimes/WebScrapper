@@ -8,5 +8,5 @@ Guía de instalación:  https://ludwingperezt.medium.com/instalar-virtualenv-con
 # Activar entorno virtual venv
 
 source venv/bin/activate
-
+deactivate
 
