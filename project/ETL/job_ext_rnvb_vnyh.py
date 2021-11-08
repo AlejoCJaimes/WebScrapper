@@ -7,7 +7,7 @@ class Extract:
         self._dataset_datos_gov = None
         #self._credentials = credentials.Credentials().ext()
 
-    def extract(self,app_token_, username_, password_):
+    def extract(self,app_token_, username_, password_, site_):
         # authenticated client
         client = Socrata(domain="www.datos.gov.co",
                  app_token=app_token_,
@@ -17,7 +17,7 @@ class Extract:
                 #  username=self._credentials[1],
                 #  password=self._credentials[2])
 
-        results = client.get("rnvb-vnyh", limit=3000) # Dataset_S_OK
+        results = client.get(site_, limit=3000) # Dataset_S_OK
 
         # Convert to pandas DataFrame
         self._dataset_datos_gov = pd.DataFrame.from_records(results)
