@@ -2,9 +2,10 @@ import argparse
 import logging
 import data_page_objects as dpage
 import trf_json_list as json_decoder
-import pandas as pd 
+import datetime
 import sys
 import os
+import re
 import errno
 from common import config
 from vap_route import ROOT_RUOUTE
@@ -29,8 +30,15 @@ def _data_gov_scraper(data_site_uid):
         #[print(label) for label in labels[0]]
     else:
         logger.error('Ha ocurrido un error en la automatización del proceso')
-    df = _extract_dataset(data_site_uid)
-    export_data(df,labels[0])
+    
+    df = _extract_dataset(data_site_uid,site_url_location(host))
+    export_data(df,labels[0],data_site_uid)
+    #cleaning_data()
+def site_url_location(host):  
+  pattern = re.compile(r'^https://.+/')
+  site = "".join(pattern.findall(host))
+  site = host.replace(site,'')
+  return site[:-6]
 
 
 def _fetch_labels(data_site_uid, host):
@@ -52,33 +60,36 @@ def _export_labels(path):
     return list_labels
 
 
-def _extract_dataset(data_site_uid):
+def _extract_dataset(data_site_uid, site_location):
     user_access = cred.Credentials().ext()
-    df = Api_dataset.Extract().extract(user_access[0],user_access[1],user_access[2])
+    df = Api_dataset.Extract().extract(user_access[0],user_access[1],user_access[2],site_location)
     host = config()['data_sites'][data_site_uid]['url']
     logging.info('Extrayendo datos de  {}'.format(host))
     logger.info('{} filas extraidas.'.format(len(df.axes[0])))
     return df
 
+def format_date():
+  date_format = datetime.datetime.now()
+  #date_format.strftime("_%d%m%Y_%H_%M")
+  return date_format.strftime("_%d%m%Y%H%M")
+format_date()
 
-def export_data(df, list):
+def export_data(df, list, data_site_uid):
     status = True
     logger.info('Exportando data ...')
     path_dir = ROOT_RUOUTE()[:-1]+ ETL_ROUTE() + 'RawFiles'
     try:
-        #create dir
-        os.mkdir(path_dir)
-
-        #export df to excel
-        #workbook = Workbook()
-        excel_filename = 'data_saber_11_2020_2.xlsx'
+        
+        os.mkdir(path_dir) if os.path.exists(path_dir) == False else False
+        
+        #export excel
+        excel_filename =   'ds_'+data_site_uid + format_date() + '.xlsx'# 'ds_saber_11_2020_2_07112021.xlsx'
         path_excel_file = path_dir + '/' + excel_filename
 
-        #df.to_excel(path_excel_file, index=False, encoding='utf-8')
-        df.to_excel(path_excel_file, index=False, encoding='utf-8', sheet_name= 'resultados_saber_11_2020_2')
+        df.to_excel(path_excel_file, index=False, encoding='utf-8', sheet_name= f'ds_{data_site_uid}')
 
         #export list to .txt
-        textfile_name = 'labels_saber_11_2020_2.txt'
+        textfile_name = 'labels_'+data_site_uid + format_date() + '.txt'
         path_text_file = path_dir + '/' + textfile_name
         textfile = open(path_text_file,'w')
         [textfile.write(element + ',') for element in list]
