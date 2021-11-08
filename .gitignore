@@ -6,3 +6,4 @@ project/Acc.txt
 project/__pycache__
 project/web_scrapper_labels/__pycache__/
 project/ETL/__pycache__/
+project/ETL/RawFiles/
