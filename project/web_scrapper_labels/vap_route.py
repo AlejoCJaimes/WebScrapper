@@ -45,3 +45,4 @@ def CONFIG_ROUTE():
     pattern = re.compile(r'(/.+)')
     __CONFIG_ROUTE = "".join(pattern.findall(root_route))
     return __CONFIG_ROUTE + '/config.yaml'
+
