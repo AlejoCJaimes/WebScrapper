@@ -1,6 +1,7 @@
 import argparse
 import logging
 import data_page_objects as dpage
+import functions_handling as aux_func
 import trf_json_list as json_decoder
 import datetime
 import sys
@@ -10,15 +11,16 @@ import errno
 from common import config
 from vap_route import ROOT_RUOUTE
 from vap_route import ETL_ROUTE
+from tabulate import tabulate
 sys.path.append('..')
 from ETL import credentials as cred
 from ETL import job_ext_rnvb_vnyh as Api_dataset
-
+from ETL import job_trf_rnvb_vnyh as trf
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
+# core function
 def _data_gov_scraper(data_site_uid):
     host = config()['data_sites'][data_site_uid]['url']
     logging.info('Inicilializando scraper para {}'.format(host))
@@ -33,7 +35,9 @@ def _data_gov_scraper(data_site_uid):
     
     df = _extract_dataset(data_site_uid,site_url_location(host))
     export_data(df,labels[0],data_site_uid)
-    #cleaning_data()
+    load_dataset_dirty()
+
+
 def site_url_location(host):  
   pattern = re.compile(r'^https://.+/')
   site = "".join(pattern.findall(host))
@@ -103,6 +107,30 @@ def export_data(df, list, data_site_uid):
         if e.errno != errno.EEXIST:
             raise
     return status
+
+def load_dataset_dirty():
+    path_dir = ROOT_RUOUTE()[:-1]+ ETL_ROUTE() + 'RawFiles'
+    logging.info('Cargando datasets desde  {}'.format(ETL_ROUTE() + 'RawFiles'))
+    list_files = aux_func.AuxiliarFunctions()
+    files_out = list_files.found_files(path_dir)
+    headers = ['Archivos', 'Peso'] 
+    print(tabulate(zip(files_out.keys(),files_out.values()), headers, tablefmt="fancy_grid"))
+    logger.info('Datasets cargados correctamente - Status OK')
+    print(f'Datasets encontrados {len(files_out.keys())}')
+    #filename = str(input('Nombre de dataset a transformar: '))
+    #exist_ds =  os.path.exists(path_dir+filename)
+    # os.mkdir(path_dir) if os.path.exists(path_dir) == False else False
+    # logging.info('Cargando datasets...  {}'.format(ETL_ROUTE() + 'RawFiles'))
+    # content = os.listdir(path_dir)
+    # datasets_excel = []
+    # for file in content:
+    #     if os.path.isfile(os.path.join(path_dir, file)) and file.endswith('.xlsx'):
+    #         datasets_excel.append(file)
+    # print(datasets_excel)
+    # content = os.listdir(ETL_ROUTE() + 'RawFiles/')
+    # logging.info('Iniciando transformación...  {}'.format(host))
+    # logger.info('Archivos exportados correctamente - Status OK')
+
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
