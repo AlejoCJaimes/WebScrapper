@@ -87,10 +87,10 @@ def export_data(df, list, data_site_uid):
         os.mkdir(path_dir) if os.path.exists(path_dir) == False else False
         
         #export excel
-        excel_filename =   'ds_'+data_site_uid + format_date() + '.xlsx'# 'ds_saber_11_2020_2_07112021.xlsx'
-        path_excel_file = path_dir + '/' + excel_filename
+        csv_filename =   'ds_'+data_site_uid + format_date() + '.csv'# 'ds_saber_11_2020_2_07112021.xlsx'
+        path_excel_file = path_dir + '/' + csv_filename
 
-        df.to_excel(path_excel_file, index=False, encoding='utf-8', sheet_name= f'ds_{data_site_uid}')
+        df.to_csv(path_excel_file, index=False, encoding='utf-8')
 
         #export list to .txt
         textfile_name = 'labels_'+data_site_uid + format_date() + '.txt'
@@ -101,7 +101,7 @@ def export_data(df, list, data_site_uid):
 
         logger.info('Archivos exportados correctamente - Status OK')
         logger.info('Ruta de archivos: {}'.format(ETL_ROUTE() + 'RawFiles'))
-        logger.info('Arhivos exportados: \n{0}\n{1}'.format(excel_filename,textfile_name))
+        logger.info('Arhivos exportados: \n{0}\n{1}'.format(csv_filename,textfile_name))
     except OSError as e:
         status = False
         if e.errno != errno.EEXIST:
