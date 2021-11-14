@@ -11,6 +11,7 @@ import errno
 from common import config
 from vap_route import ROOT_RUOUTE
 from vap_route import ETL_ROUTE
+from dataset_rows import MaxRowData
 from tabulate import tabulate
 sys.path.append('..')
 from ETL import credentials as cred
@@ -36,6 +37,7 @@ def _data_gov_scraper(data_site_uid):
     df = _extract_dataset(data_site_uid,site_url_location(host))
     export_data(df,labels[0],data_site_uid)
     load_dataset_dirty()
+    
 
 
 def site_url_location(host):  
@@ -65,10 +67,16 @@ def _export_labels(path):
 
 
 def _extract_dataset(data_site_uid, site_location):
-    user_access = cred.Credentials().ext()
-    df = Api_dataset.Extract().extract(user_access[0],user_access[1],user_access[2],site_location)
+    
+    #helpful
     host = config()['data_sites'][data_site_uid]['url']
     logging.info('Extrayendo datos de  {}'.format(host))
+
+    host = config()['data_sites'][data_site_uid]['url_main_page']
+    user_access = cred.Credentials().ext()
+
+
+    df = Api_dataset.Extract().extract(user_access[0],user_access[1],user_access[2],site_location,MaxRowData().RowsDataset(host))
     logger.info('{} filas extraidas.'.format(len(df.axes[0])))
     return df
 
