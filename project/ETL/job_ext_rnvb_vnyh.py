@@ -17,7 +17,7 @@ class Extract:
                 #  username=self._credentials[1],
                 #  password=self._credentials[2])
 
-        results = client.get(site_) # Dataset_S_OK
+        results = client.get(site_,limit=504872) # Dataset_S_OK
 
         # Convert to pandas DataFrame
         self._dataset_datos_gov = pd.DataFrame.from_records(results)
