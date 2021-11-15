@@ -19,7 +19,7 @@ class AuxiliarFunctions:
     def found_files(self, path_dir):
         content = os.listdir(path_dir)
         for file in content:
-            if os.path.isfile(os.path.join(path_dir, file)) and file.endswith('.xlsx'):
+            if os.path.isfile(os.path.join(path_dir, file)) and file.endswith('.csv'):
                 self._nameFiles.append(file)
                 self._sizefiles.append(self.convert_bytes(
                     os.path.getsize(path_dir + '/' + file), 'MB'))
