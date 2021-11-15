@@ -5,4 +5,7 @@ data_sites:
   saber_11_2020_2:
     url: https://www.datos.gov.co/resource/rnvb-vnyh.json?
     url_main_page: https://www.datos.gov.co/Educaci-n/Saber-11-2020-2/rnvb-vnyh
+  calidad_aire:
+    url: https://www.datos.gov.co/resource/4rxh-atuh.json?
+    url_main_page: https://www.datos.gov.co/Ambiente-y-Desarrollo-Sostenible/Reporte-medicines-calidad-de-aire-CAM-SISAIRE/4rxh-atuh
 
