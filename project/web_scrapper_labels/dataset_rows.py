@@ -24,15 +24,19 @@ class MaxRowData:
             pattern = (r'non_null.+\blargest*')
             result = re.findall(pattern, xpression)
             pattern2 = (r'.+\,')
-            result2 = re.findall(pattern2, result[0])
-            for x in result2:
-                x = x.replace('"', '')
-                x = x.replace("'", '')
-                x = x.replace(",", '')
-                list_cached_contents.append(x.split(':'))
+            if self.validate_index(result) == 1:
+                result2 = re.findall(pattern2, result[0])
+                for x in result2:
+                    x = x.replace('"', '')
+                    x = x.replace("'", '')
+                    x = x.replace(",", '')
+                    list_cached_contents.append(x.split(':'))
 
         return self.find_list_max_size(list_cached_contents)
-
+    
+    def validate_index(self, list_):
+      return len(list_)
+    
     def find_list_max_size(self, values):
 
         ls_max_size = []
