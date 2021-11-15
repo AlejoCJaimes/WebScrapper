@@ -118,6 +118,7 @@ def export_data(df, list, data_site_uid):
 
 def load_dataset_dirty():
     path_dir = ROOT_RUOUTE()[:-1]+ ETL_ROUTE() + 'RawFiles'
+    print(path_dir)
     logging.info('Cargando datasets desde  {}'.format(ETL_ROUTE() + 'RawFiles'))
     list_files = aux_func.AuxiliarFunctions()
     files_out = list_files.found_files(path_dir)
