@@ -29,7 +29,8 @@ def convert_bytes(size, unit=None):
         return print('File size: ' + str(size) + ' bytes')
  
  
-file = 'ds_saber_11_2020_2_071120212150.xlsx'
+ 
+file = 'ds_saber_11_2020_1_141120211727.csv'
  
 print("Using 1st method : ")
 size = get_file_size(file)
