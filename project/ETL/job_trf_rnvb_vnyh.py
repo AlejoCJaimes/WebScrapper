@@ -5,19 +5,25 @@ que presentaron el icfes en zonas rurales y zonas urbanas.
 '''
 
 import pandas as pd
+import numpy as np
 
 class Transform:
-    def __init__(self):
+    def __init__(self, file_name, path_file):
         self._data_set_load = None
         self._data_set_dirty = None
         self._data_set_clean = None
+        self._path_file = path_file + file_name.strip()
 
-    def load_dataset(self, file_name, path_file):
+    def load_dataset(self):
+        self._data_set_load = pd.read_csv(self._path_file, encoding='utf-8')
+
+    def change_case_to_upper(self):
+        self._data_set_load = self._data_set_load.columns.str.upper()
+    
+    def fix_missing_data(self):
         pass
-        self._data_set_load = pd.read_excel(path_file)        
 
 
-   
     def drop_columns(self, dataset):
         dataset = dataset.drop(columns=['estu_tipodocumento'])
         return dataset
@@ -34,4 +40,4 @@ if __name__ == '__main__':
     print(df_pss.getDataset())
     # operations with pandas
     #dataset = df_pss.drop_columns(dataset)
-    #f_pss.print_dataset()
+    # f_pss.print_dataset()
