@@ -25,16 +25,12 @@ def _data_gov_scraper(data_site_uid):
     logging.info('Inicilializando scraper para {}'.format(host))
     homepage = _fetch_labels(data_site_uid, host)
     labels = _export_labels(homepage._path)
-    if labels[1]:
-        logger.info(
-            'Ejecución exitosa. {} etiquetas encontradas'.format(len(labels[0])))
-        #[print(label) for label in labels[0]]
-    else:
-        logger.error('Ha ocurrido un error en la automatización del proceso')
-    
+    logger.info('Ejecución exitosa. {} etiquetas encontradas'.format(len(labels[0]))) if labels[1] else logger.error('Ha ocurrido un error en la automatización del proceso')
+    #[print(label) for label in labels[0]]
+
     df = _extract_dataset(data_site_uid,aux_func.AuxiliarFunctions().site_url_location(host))
-    export_data(df,labels[0],data_site_uid)
-    load_dataset_dirty()
+    _export_data(df,labels[0],data_site_uid)
+    _load_dataset_dirty()
     
 
 
@@ -59,7 +55,7 @@ def _export_labels(path):
 
 def _extract_dataset(data_site_uid, site_location):
     
-    #helpful
+    # helpful
     host = config()['data_sites'][data_site_uid]['url']
     logging.info('Extrayendo datos de  {}'.format(host))
 
@@ -71,7 +67,7 @@ def _extract_dataset(data_site_uid, site_location):
     logger.info('{} filas extraidas.'.format(len(df.axes[0])))
     return df
 
-def export_data(df, list, data_site_uid):
+def _export_data(df, list, data_site_uid):
     status = True
     logger.info('Exportando data ...')
     path_dir = ROOT_RUOUTE()[:-1]+ ETL_ROUTE() + 'RawFiles'
@@ -81,9 +77,9 @@ def export_data(df, list, data_site_uid):
         
         #export excel
         csv_filename =   'ds_'+data_site_uid + aux_func.AuxiliarFunctions().format_date() + '.csv'# 'ds_saber_11_2020_2_07112021.xlsx'
-        path_excel_file = path_dir + '/' + csv_filename
+        path_csv_file = path_dir + '/' + csv_filename
 
-        df.to_csv(path_excel_file, index=False, encoding='utf-8')
+        df.to_csv(path_csv_file, index=False, encoding='utf-8')
 
         #export list to .txt
         textfile_name = 'labels_'+data_site_uid + aux_func.AuxiliarFunctions().format_date() + '.txt'
@@ -101,17 +97,17 @@ def export_data(df, list, data_site_uid):
             raise
     return status
 
-def load_dataset_dirty():
+def _load_dataset_dirty():
     path_dir = ROOT_RUOUTE()[:-1]+ ETL_ROUTE() + 'RawFiles'
-    print(path_dir)
     logging.info('Cargando datasets desde  {}'.format(ETL_ROUTE() + 'RawFiles'))
-    list_files = aux_func.AuxiliarFunctions()
-    files_out = list_files.found_files(path_dir)
+    files_out = aux_func.AuxiliarFunctions().found_files(path_dir,'.csv')
     headers = ['Archivos', 'Peso'] 
     print(tabulate(zip(files_out.keys(),files_out.values()), headers, tablefmt="fancy_grid"))
     logger.info('Datasets cargados correctamente - Status OK')
     print(f'Datasets encontrados {len(files_out.keys())}')
-    #filename = str(input('Nombre de dataset a transformar: '))
+    filename = str(input('\nDataset a transformar: '))
+    _clean_dataset(filename,path_dir)
+    
     #exist_ds =  os.path.exists(path_dir+filename)
     # os.mkdir(path_dir) if os.path.exists(path_dir) == False else False
     # logging.info('Cargando datasets...  {}'.format(ETL_ROUTE() + 'RawFiles'))
@@ -124,6 +120,11 @@ def load_dataset_dirty():
     # content = os.listdir(ETL_ROUTE() + 'RawFiles/')
     # logging.info('Iniciando transformación...  {}'.format(host))
     # logger.info('Archivos exportados correctamente - Status OK')
+
+def _clean_dataset(filename, path_dir):
+    pass
+    # Call job transformation
+
 
 
 if __name__ == '__main__':
