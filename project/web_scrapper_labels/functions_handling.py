@@ -18,10 +18,10 @@ class AuxiliarFunctions:
         else:
             return str(size) + ' bytes'
 
-    def found_files(self, path_dir):
+    def found_files(self, path_dir,extension):
         content = os.listdir(path_dir)
         for file in content:
-            if os.path.isfile(os.path.join(path_dir, file)) and file.endswith('.csv'):
+            if os.path.isfile(os.path.join(path_dir, file)) and file.endswith(extension):
                 self._nameFiles.append(file)
                 self._sizefiles.append(self.convert_bytes(
                     os.path.getsize(path_dir + '/' + file), 'MB'))
