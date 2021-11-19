@@ -1,4 +1,6 @@
 import os
+import re
+import datetime
 
 
 class AuxiliarFunctions:
@@ -24,3 +26,13 @@ class AuxiliarFunctions:
                 self._sizefiles.append(self.convert_bytes(
                     os.path.getsize(path_dir + '/' + file), 'MB'))
         return dict(zip(self._nameFiles, self._sizefiles))
+
+    def site_url_location(self, host):
+        pattern = re.compile(r'^https://.+/')
+        site = "".join(pattern.findall(host))
+        site = host.replace(site, '')
+        return site[:-6]
+
+    def format_date(self):
+        date_format = datetime.datetime.now()
+        return date_format.strftime("_%d%m%Y%H%M")
