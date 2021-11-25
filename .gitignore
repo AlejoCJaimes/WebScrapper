@@ -1,7 +1,7 @@
 venv/
 project/.APICredentials.txt
 project/TokenApp.txt
-project/credentials.py
+project/ETL/credentials.py
 project/Acc.txt
 project/__pycache__
 project/web_scrapper_labels/__pycache__/
