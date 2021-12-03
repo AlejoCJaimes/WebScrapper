@@ -106,8 +106,9 @@ def _load_dataset_dirty():
     logger.info('Datasets cargados correctamente - Status OK')
     print(f'Datasets encontrados {len(files_out.keys())}')
     filename = str(input('\nDataset a transformar: '))
+    logger.info('Empezando Limpieza... - Status OK')
     _clean_dataset(filename,path_dir)
-    
+    return 0
     #exist_ds =  os.path.exists(path_dir+filename)
     # os.mkdir(path_dir) if os.path.exists(path_dir) == False else False
     # logging.info('Cargando datasets...  {}'.format(ETL_ROUTE() + 'RawFiles'))
@@ -122,9 +123,27 @@ def _load_dataset_dirty():
     # logger.info('Archivos exportados correctamente - Status OK')
 
 def _clean_dataset(filename, path_dir):
-    pass
     # Call job transformation
+    labels_name = filename.replace('ds','labels')
+    dataset = filename 
+    logging.info('Iniciando transformación...  ')
+    process = trf.Transform(filename,path_dir)
+    # Start TRF
+    process.load_labels(labels_name)
+    process.load_dataset()
+    process.missing_data()
+    process.null_handling_values()
+    logging.info('Eliminando duplicados y llenando nulos')
+    process.fill_null_values()
+    df = process.get_clean_dataset()
+    logger.info('Exportando dataset limpio ...')
+    # export excel
+    csv_filename =   'clean_ds'+ aux_func.AuxiliarFunctions().format_date() + '.csv'# clean
+    path_csv_file = path_dir + '/' + csv_filename
 
+    df.to_csv(path_csv_file, index=False, encoding='utf-8')
+    logger.info('Dataset {} exportado correctamente.'.format(csv_filename))
+    
 
 
 if __name__ == '__main__':
